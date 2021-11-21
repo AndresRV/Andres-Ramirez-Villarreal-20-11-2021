@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TaskList.Views.Index"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView ItemsSource="{Binding ListViewSource}"
+                      HasUnevenRows="True"
+                      SelectedItem="{Binding ToDoSelected}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="60"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <StackLayout Grid.Column="1" Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center">
+                                    <Label Text="{Binding Description}" FontSize="Medium" TextColor="Black"/>
+                                    <Label Text="Completada!!" IsVisible="{Binding IsComplete}" FontSize="Medium"/>
+                                </StackLayout>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            
+            <Frame Padding="20"
+                   Margin="10"
+                   VerticalOptions="EndAndExpand">
+                <StackLayout>
+                    <Label Text="Tarea"
+                       FontSize="Medium"
+                       HorizontalOptions="Center"
+                       TextColor="Black"/>
+
+                    <Entry Placeholder="Ingrese la tarea"
+                           FontSize="Medium"
+                           PlaceholderColor="Gray"
+                           TextColor="Black"
+                           Text="{Binding DescriptionForm}"/>
+
+                    <Grid Margin="0, 0, 0, 5">
+                        <Label Margin="99, 0"
+                               Text="¿Completada?"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="Start"/>
+
+                        <CheckBox Margin="99, 0"
+                                  HorizontalOptions="End"
+                                  IsChecked="{Binding IsCompleteForm}"
+                                  Color="Blue"/>
+                    </Grid>
+                    
+                    <Button Text="{Binding InsertUpdateButton}"
+                            FontSize="Small"
+                            TextColor="White"
+                            BackgroundColor="Blue"
+                            Command="{Binding InsertUpdateToDoCommand}"/>
+
+                    <Button Text="Eliminar"
+                            FontFamily="Small"
+                            TextColor="White"
+                            BackgroundColor="Red"
+                            IsVisible="{Binding IsVisibleDelete}"
+                            Command="{Binding DeleteToDoCommand}"/>
+                </StackLayout>
+            </Frame>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
